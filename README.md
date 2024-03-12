@@ -50,18 +50,20 @@ Melody Crasher VRは、様々な武器を利用して、リズムよく流れて
 
 - 譜面のJsonファイルと曲本体を(ダウンロードフォルダ)\VRRythmGame\Assets\Resources内に入れます。
 - その後、以下の手順に従ってください。
-- ![プレゼンテーション2](https://github.com/hayaashi/VRRythm/assets/63552585/675ccdb1-82db-4466-a288-3d576f22e67f)
+![プレゼンテーション2](https://github.com/hayaashi/VRRythm/assets/63552585/675ccdb1-82db-4466-a288-3d576f22e67f)
 
 
-### 使用前に
+## 使用前に
 
-初めてご利用の前に、以下のサイトへアクセスしOculus Integration Assetsをダウンロードしてください。
-https://assetstore.unity.com/packages/tools/integration/oculus-integration-deprecated-82022?locale=ja-JP
+- 初めてご利用の前に、以下のサイトへアクセスしOculus Integration Assetsをダウンロードしてください。
+- https://assetstore.unity.com/packages/tools/integration/oculus-integration-deprecated-82022?locale=ja-JP
 
-初めてインポートした際に出たエラーには"Enter Safe Modeと回答してください
-"![スクリーンショット 2024-03-13 004056](https://github.com/open-video-game-library/MinimumSabar/assets/126433429/47597cf6-07bc-4288-979d-6167b647cf66)
+- 初めてインポートした際に出たエラーには"Enter Safe Modeと回答してください
 
-その後、以下の手順に従ってOculus Integrationをインポートしてください。
+![スクリーンショット 2024-03-13 004056](https://github.com/open-video-game-library/MinimumSabar/assets/126433429/47597cf6-07bc-4288-979d-6167b647cf66)
+
+- その後、以下の手順に従ってOculus Integrationをインポートしてください。
+
 ![downloaddata](https://github.com/open-video-game-library/MinimumSabar/assets/126433429/a731eea3-39e3-43a2-9168-642588438ff8)
 
 
