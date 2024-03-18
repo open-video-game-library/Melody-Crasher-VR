@@ -1,6 +1,6 @@
 # Melody Crasher VR
 
-[日本語版README](https://github.com/open-video-game-library/Melody-Crasher-VR/blob/main/README_JP.md)
+[日本語版README](https://github.com/open-video-game-library/Melody-Crasher-VR/blob/main/README.JP.md)
 
 Melody Crasher VR is a VR game in which you utilize various weapons to destroy the rhythmically flowing notes.
 
