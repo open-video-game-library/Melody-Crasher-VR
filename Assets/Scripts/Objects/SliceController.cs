@@ -101,7 +101,7 @@ public class SliceController : MonoBehaviour
     public void Cut(GameObject objectToSlice, Vector3 position, Vector3 right)
     {
         if (isSliced) { return; }
-
+        isSliced = true;
         if (GameStateManager.GameState == GameState.Play) { Result.hits += 1; }
         else { Result.hits = 0; }
 
@@ -158,7 +158,7 @@ public class SliceController : MonoBehaviour
                 return;
         }
 
-        isSliced = true;
+        
 
         SlicedHull slicedObject = SliceObject(objectToSlice.gameObject, position, right, MaterialAfterSlice);
 

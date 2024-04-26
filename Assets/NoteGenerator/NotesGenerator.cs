@@ -32,14 +32,19 @@ public class NotesGenerator : MonoBehaviour
 
 
 
-    [System.NonSerialized]
+    //[System.NonSerialized]
     public static List<int> scoreNum = new List<int>(); // ノーツの番号を順に入れる
 
-    [System.NonSerialized]
+    //[System.NonSerialized]
     public List<int> scoreBlock = new List<int>(); // ノーツの種類を順に入れる
 
-    [System.NonSerialized]
+    //[System.NonSerialized]
     public List<int> scoreLPB = new List<int>(); // ノーツのLPBを順に入れる
+
+    //[System.NonSerialized]
+    public List<int> scoreType = new List<int>(); // ノーツのLPBを順に入れる
+
+
     private int BPM;
 
     [System.NonSerialized]
@@ -58,8 +63,8 @@ public class NotesGenerator : MonoBehaviour
     AudioSource audioSource;
 
 
-    [SerializeField]
-    NotesManager notesManager;
+    //[SerializeField]
+    //NotesManager notesManager;
 
     public int difficult = 0;
 
@@ -110,6 +115,7 @@ public class NotesGenerator : MonoBehaviour
             scoreNum.Add(int.Parse(jsondata["notes"][difficult][i]["num"].ToString()));
             scoreBlock.Add(int.Parse(jsondata["notes"][difficult][i]["block"].ToString()));
             scoreLPB.Add(int.Parse(jsondata["notes"][difficult][i]["lpb"].ToString()));
+            scoreType.Add(int.Parse(jsondata["notes"][difficult][i]["type"].ToString()));
         }
     }
 
@@ -144,6 +150,8 @@ public class NotesGenerator : MonoBehaviour
             audioSource.Pause();
             GameStateManager.countDown = audioSource.clip.length;
             nowTime = -CubeParameters.startPointZ / CubeParameters.speed ;
+            beatBorder = 0;
+            beatTorus = 0;
 
             //Debug.Log("nowTime" + nowTime + ":BPM" + BPM + "CubeParameters.startPointZ" + CubeParameters.startPointZ + "CubeParameters.speed" + CubeParameters.speed);
             return;
@@ -182,10 +190,18 @@ public class NotesGenerator : MonoBehaviour
     private int beatCount;// json配列用(拍数)のカウント
     private bool isBeat;// ビートを打っているか(生成のタイミング)
 
+    [SerializeField] GameObject torusPrefab;
+    [SerializeField] GameObject borderPrefab;
+    [SerializeField] GameObject borderPrefab2;
+
+    int beatTorus;
+    int beatBorder;
 
     /// <summary>
     /// 譜面上の時間とゲームの時間のカウントと制御
     /// </summary>
+    /// 
+
     void GetScoreTime()
     {
         //今の音楽の時間の取得
@@ -197,6 +213,26 @@ public class NotesGenerator : MonoBehaviour
         //楽譜上でどこかの取得
         float instTime = -CubeParameters.startPointZ / CubeParameters.speed ;
         beatNum = (int)((nowTime - instTime) * BPM / 60 * LPB); //(2)
+        if((beatNum) >= (BPM) / 60f * beatBorder)
+        {
+            GameObject torus3 = Instantiate(borderPrefab2);
+            CubeController cubeController3 = torus3.GetComponent<CubeController>();
+            cubeController3.startPoint = new Vector3(0f, GameStateManager.defauldCenterEyeAnchor.position.y * 3.0f / 9.0f, CubeParameters.startPointZ);
+            beatBorder++;
+        }
+
+        if ((beatNum) >= (BPM) * LPB / 60f * beatTorus)
+        {   
+            GameObject torus = Instantiate(torusPrefab);
+            CubeController cubeController = torus.GetComponent<CubeController>();
+            cubeController.startPoint = new Vector3(0f, GameStateManager.defauldCenterEyeAnchor.position.y * 3.0f / 9.0f, CubeParameters.startPointZ);
+
+            GameObject torus2 = Instantiate(borderPrefab);
+            CubeController cubeController2 = torus2.GetComponent<CubeController>();
+            cubeController2.startPoint = new Vector3(0f, GameStateManager.defauldCenterEyeAnchor.position.y * 3.0f / 9.0f, CubeParameters.startPointZ);
+            beatTorus++;
+        }
+
     }
 
     /// <summary>
@@ -218,22 +254,13 @@ public class NotesGenerator : MonoBehaviour
         //生成のタイミングなら
         if (isBeat)
         {
+            cg.GenerateCube(scoreBlock[beatCount] - 3, 0f);
             /*
-            //ノーツ0の生成
-            if (scoreBlock[beatCount] == 0)
+            switch (scoreBlock[beatCount])
             {
-                cg.GenerateCube(0f, 0f);
-                Debug.Log("Generated0");
-            }
-
-            //ノーツ1の生成
-            if (scoreBlock[beatCount] == 1)
-            {
-                cg.GenerateCube(0f, 0f);
-                Debug.Log("Generated1");
+                cg.GenerateCube(scoreBlock[beatCount] - 3 * 0.75f, 0f);
             }
             */
-            cg.GenerateCube(0f, 0f);
 
             beatCount++; //(5)
             isBeat = false;

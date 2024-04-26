@@ -76,7 +76,7 @@ public class CubeGenerator : MonoBehaviour
 
         if (GameStateManager.GameState == GameState.End) { return; }
 
-        hight = GameStateManager.defauldCenterEyeAnchor.position.y * 8.0f / 9.0f;
+        hight = GameStateManager.defauldCenterEyeAnchor.position.y * 3.0f / 9.0f;
 
         generateCount += Time.deltaTime;
 
@@ -101,12 +101,12 @@ public class CubeGenerator : MonoBehaviour
 
     public void GenerateCube(float startPointX, float startPoiontY)
     {
-        float x = Random.Range(-0.75f * GameStateManager.defauldCenterEyeAnchor.position.y, 0.75f * GameStateManager.defauldCenterEyeAnchor.position.y);
-        float y = Random.Range(-0.75f * GameStateManager.defauldCenterEyeAnchor.position.y, 0.75f * GameStateManager.defauldCenterEyeAnchor.position.y);
+        //float x = Random.Range(-0.75f * GameStateManager.defauldCenterEyeAnchor.position.y, 0.75f * GameStateManager.defauldCenterEyeAnchor.position.y);
+        //float y = Random.Range(-0.75f * GameStateManager.defauldCenterEyeAnchor.position.y, 0.75f * GameStateManager.defauldCenterEyeAnchor.position.y);
         GameObject cube = Instantiate(notes);
 
         CubeController cubeController = cube.GetComponent<CubeController>();
-        cubeController.startPoint = new Vector3(GameStateManager.defauldCenterEyeAnchor.position.x + x, hight + y, CubeParameters.startPointZ);
+        cubeController.startPoint = new Vector3(GameStateManager.defauldCenterEyeAnchor.position.x + startPointX * 0.25f, hight, CubeParameters.startPointZ);
         cubeController.speed = defaultSpeed;
     }
 }
